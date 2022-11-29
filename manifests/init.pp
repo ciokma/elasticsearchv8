@@ -84,8 +84,17 @@ class elasticsearchv8 {
     ensure => file,
     mode   => '0644',
     owner  => 'root',
-    group  => 'root',
+    group  => 'kibana',
     source => 'puppet:///modules/elasticsearchv8/kibana.service',
+  }
+  ->
+  file {'kibana.yaml':
+    path   => '/etc/kibana/kibana.yml',
+    ensure => file,
+    mode   => '0644',
+    owner  => 'root',
+    group  => 'kibana',
+    source => 'puppet:///modules/elasticsearchv8/kibana.yml',
   }
   ~>
   service {'kibana':
