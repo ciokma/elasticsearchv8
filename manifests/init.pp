@@ -19,6 +19,15 @@ class elasticsearchv8 {
     require => Class['java']
   }
   ->
+  #elasticsearch.yaml configuration
+  file {'/etc/elasticsearch/elasticsearch.yml':
+    ensure => file,
+    mode   => '0660',
+    owner  => 'root',
+    group  => 'elasticsearch',
+    source => 'puppet:///modules/elasticsearchv8/elasticsearch.yml',
+  }
+  ->
   service {'elasticsearch':
     ensure => running,
     enable => true,
@@ -38,15 +47,7 @@ class elasticsearchv8 {
     group  => 'root',
     source => 'puppet:///modules/elasticsearchv8/central.conf',
   }
-  ->
-  #elasticsearch.yaml configuration
-  file {'/etc/elasticsearch/elasticsearch.yml':
-    ensure => file,
-    mode   => '0660',
-    owner  => 'root',
-    group  => 'elasticsearch',
-    source => 'puppet:///modules/elasticsearchv8/elasticsearch.yml',
-  }
+
   ~>
   service {'logstash':
     ensure => running,
