@@ -2,7 +2,7 @@ class elasticsearchv8 {
 
   class { 'java':
     distribution => jre,
-    before => Class['::elasticsearch'],  Class['::logstash']],
+    #before => Class['::elasticsearch'],  Class['::logstash']],
   }
   
   yumrepo { 'elasticsearch':
