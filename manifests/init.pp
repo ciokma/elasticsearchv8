@@ -1,4 +1,4 @@
-class elasticsearch {
+class elasticsearchv8 {
 
   class { 'java':
     distribution => jre,
