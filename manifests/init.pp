@@ -33,6 +33,19 @@ class elasticsearchv8 {
     enable => true,
     require => Package['elasticsearch']
   }
+  
+  ->
+  
+  #metricbeat
+  package {'metricbeat':
+    ensure  => installed,
+    require => Package['elasticsearch'],
+  }
+  ~>
+  service {'metricbeat':
+    ensure => running,
+    enable => true,
+  }
   ->
   #logstash
   package {'logstash':
