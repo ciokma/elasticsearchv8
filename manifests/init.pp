@@ -1,4 +1,4 @@
-class elasticsearchv8 {
+class elkv8 {
 
   class { 'java':
     distribution => jre,
@@ -25,7 +25,7 @@ class elasticsearchv8 {
     mode   => '0660',
     owner  => 'root',
     group  => 'elasticsearch',
-    source => 'puppet:///modules/elasticsearchv8/elasticsearch.yml',
+    source => 'puppet:///modules/elkv8/elasticsearch.yml',
   }
   ->
   service {'elasticsearch':
@@ -58,7 +58,7 @@ class elasticsearchv8 {
     mode   => '0644',
     owner  => 'root',
     group  => 'root',
-    source => 'puppet:///modules/elasticsearchv8/central.conf',
+    source => 'puppet:///modules/elkv8/central.conf',
   }
 
   ~>
@@ -85,7 +85,7 @@ class elasticsearchv8 {
     mode   => '0644',
     owner  => 'root',
     group  => 'kibana',
-    source => 'puppet:///modules/elasticsearchv8/kibana.service',
+    source => 'puppet:///modules/elkv8/kibana.service',
   }
   ->
   file {'kibana.yaml':
@@ -94,7 +94,7 @@ class elasticsearchv8 {
     mode   => '0644',
     owner  => 'root',
     group  => 'kibana',
-    source => 'puppet:///modules/elasticsearchv8/kibana.yml',
+    source => 'puppet:///modules/elkv8/kibana.yml',
   }
   ~>
   service {'kibana':
