@@ -23,6 +23,22 @@ class elasticsearchv8 {
     enable => true,
     require => Package['elasticsearch']
   }
-
+  #logstash
+  package {'logstash':
+    ensure  => installed,
+  }
+  ->
+  file {'/etc/logstash/conf.d/central.conf':
+    ensure => file,
+    mode   => '0644',
+    owner  => 'root',
+    group  => 'root',
+    source => 'puppet:///modules/elasticsearchv8/central.conf',
+  }
+  ~>
+  service {'logstash':
+    ensure => running,
+    enable => true,
+  }
 
 }
