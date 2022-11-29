@@ -43,5 +43,31 @@ class elasticsearchv8 {
     ensure => running,
     enable => true,
   }
+  ->
+  #kibana
+  package {'kibana':
+    ensure  => installed,
+    require => Package['elasticsearch'],
+  }
+  ->
+  user {'kibana':
+    ensure => present,
+    shell  => '/bin/false',
+    before => [File['kibana.service'], Service['kibana']],
+  }
+  ->
+  file {'kibana.service':
+    path   => '/usr/lib/systemd/system/kibana.service',
+    ensure => file,
+    mode   => '0644',
+    owner  => 'root',
+    group  => 'root',
+    source => 'puppet:///modules/elasticsearchv8/kibana.service',
+  }
+  ~>
+  service {'kibana':
+    ensure => running,
+    enable => true,
+  }
 
 }
